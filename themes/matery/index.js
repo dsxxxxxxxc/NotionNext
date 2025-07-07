@@ -90,8 +90,8 @@ const LayoutBase = props => {
         {/* 动态背景特效 */}
         {post && (
           <>
-            <Script src='/line.js' strategy='afterInteractive' />
-            <Script src='/ribbonDynamic.js' strategy='afterInteractive' />
+            <Script src='/themes/matery/components/line.js' strategy='afterInteractive' />
+            <Script src='/themes/matery/components/ribbonDynamic.js' strategy='afterInteractive' />
           </>
         )}
 
