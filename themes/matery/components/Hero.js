@@ -6,6 +6,7 @@ import { loadExternalResource } from '@/lib/utils'
 import { useEffect, useState } from 'react'
 import CONFIG from '../config'
 import SocialLinks from '@/components/SocialLinks'
+import Link from 'next/link'
 
 let wrapperTop = 0
 
@@ -59,7 +60,11 @@ const Hero = props => {
       <div className='text-white absolute flex flex-col h-full items-center justify-center w-full '>
         {/* 站点标题 */}
         <div className='text-4xl md:text-5xl shadow-text'>
-          {siteInfo?.title || siteConfig('TITLE')}
+          <Link href='/'>
+            <span className='hover:text-orange-400 transition-colors duration-300 cursor-pointer'>
+              {siteInfo?.title || siteConfig('TITLE')}
+            </span>
+          </Link>
         </div>
         {/* 站点欢迎语 */}
         <div className='mt-2 h-12 items-center text-center shadow-text text-white text-lg'>

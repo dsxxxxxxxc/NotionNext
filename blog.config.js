@@ -65,7 +65,9 @@ const BLOG = {
     '只要生命在攀升，幸福就等于本能',
 
   // uuid重定向至 slug
-  UUID_REDIRECT: process.env.UUID_REDIRECT || false
+  UUID_REDIRECT: process.env.UUID_REDIRECT || false,
+
+  HOME_BANNER_IMAGE: process.env.NEXT_PUBLIC_HOME_BANNER_IMAGE || '/rich-soul.jpg', // 支持本地 public 目录图片或网络图片链接
 }
 
 module.exports = BLOG

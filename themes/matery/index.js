@@ -34,6 +34,7 @@ import SearchNave from './components/SearchNav'
 import TagItemMiddle from './components/TagItemMiddle'
 import CONFIG from './config'
 import { Style } from './style'
+import Script from 'next/script'
 
 const AlgoliaSearchModal = dynamic(
   () => import('@/components/AlgoliaSearchModal'),
@@ -84,6 +85,10 @@ const LayoutBase = props => {
         id='theme-matery'
         className={`${siteConfig('FONT_STYLE')} min-h-screen flex flex-col justify-between bg-hexo-background-gray dark:bg-black w-full scroll-smooth`}>
         <Style />
+
+        {/* 动态背景特效 */}
+        <Script src='/line.js' strategy='afterInteractive' />
+        <Script src='/ribbonDynamic.js' strategy='afterInteractive' />
 
         {/* 顶部导航栏 */}
         <Header {...props} />
