@@ -39,7 +39,7 @@ export const ArticleInfo = props => {
               <i className='mr-1 fas fa-eye' />
               <span className='busuanzi_value_page_pv' />
             </span>
-            <WordCount wordCount={post.wordCount} readTime={post.readTime} />
+            <WordCount wordCount={post.wordCount} readTime={post.readTime} post={post} />
           </>
         )}
       </div>

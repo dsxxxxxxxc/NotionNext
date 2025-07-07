@@ -34,5 +34,11 @@ module.exports = {
   // 标签相关
   TAG_SORT_BY_COUNT: true, // 标签是否按照文章数量倒序排列，文章多的标签排在前。
   IS_TAG_COLOR_DISTINGUISHED:
-    process.env.NEXT_PUBLIC_IS_TAG_COLOR_DISTINGUISHED === 'true' || true // 对于名称相同的tag是否区分tag的颜色
+    process.env.NEXT_PUBLIC_IS_TAG_COLOR_DISTINGUISHED === 'true' || true, // 对于名称相同的tag是否区分tag的颜色
+
+  // 字数统计
+  POST_WORD_COUNT_ENABLE: process.env.NEXT_PUBLIC_POST_WORD_COUNT_ENABLE || true, // 是否显示文章字数统计
+  POST_READ_TIME_ENABLE: process.env.NEXT_PUBLIC_POST_READ_TIME_ENABLE || true, // 是否显示阅读时间
+  POST_EXTENDED_STATS_ENABLE: process.env.NEXT_PUBLIC_POST_EXTENDED_STATS_ENABLE || false, // 是否显示扩展统计信息（字符数、段落数、句子数）
+  POST_READ_SPEED: process.env.NEXT_PUBLIC_POST_READ_SPEED || 400, // 阅读速度（字/分钟）
 }
