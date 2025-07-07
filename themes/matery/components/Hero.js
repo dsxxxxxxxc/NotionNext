@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import CONFIG from '../config'
 import SocialLinks from '@/components/SocialLinks'
 import Link from 'next/link'
+import '@/public/css/wave.css'
 
 let wrapperTop = 0
 
@@ -93,6 +94,21 @@ const Hero = props => {
         src={siteInfo?.pageCover}
         className={`header-cover object-center w-full h-screen object-cover ${siteConfig('MATERY_HOME_NAV_BACKGROUND_IMG_FIXED', null, CONFIG) ? 'fixed' : ''}`}
       />
+
+      {/* 波浪特效 */}
+      <div className="preview-overlay absolute bottom-0 left-0 w-full pointer-events-none">
+        <svg className="preview-waves" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none" shapeRendering="auto">
+          <defs>
+            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+          </defs>
+          <g className="preview-parallax">
+            <use href="#gentle-wave" x="48" y="0" fill="var(--gentle-wave1)" />
+            <use href="#gentle-wave" x="48" y="3" fill="var(--gentle-wave2)" />
+            <use href="#gentle-wave" x="48" y="5" fill="var(--gentle-wave3)" />
+            <use href="#gentle-wave" x="48" y="7" fill="var(--gentle-wave)" />
+          </g>
+        </svg>
+      </div>
     </header>
   )
 }

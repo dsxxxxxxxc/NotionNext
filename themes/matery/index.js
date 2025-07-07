@@ -90,8 +90,8 @@ const LayoutBase = props => {
         {/* 动态背景特效 */}
         {post && (
           <>
-            <Script src='/themes/matery/components/line.js' strategy='afterInteractive' />
-            <Script src='/themes/matery/components/ribbonDynamic.js' strategy='afterInteractive' />
+            <Script src='/js/line.js' strategy='afterInteractive' />
+            <Script src='/js/ribbonDynamic.js' strategy='afterInteractive' />
           </>
         )}
 
@@ -308,9 +308,6 @@ const LayoutSlug = props => {
 
         {/* 底部文章推荐 */}
         {post?.type === 'Post' && <ArticleAdjacent {...props} />}
-
-        {/* 底部公告 */}
-        <Announcement {...props} />
 
         {/* 右侧文章目录 */}
         <CatalogWrapper post={post} />
