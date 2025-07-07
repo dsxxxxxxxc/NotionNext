@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import CONFIG from '../config'
 import SocialLinks from '@/components/SocialLinks'
 import Link from 'next/link'
-import '@/public/css/wave.css'
+import ColorThief from 'color-thief-browser'
 
 let wrapperTop = 0
 
@@ -40,6 +40,14 @@ const Hero = props => {
       })
     }
 
+    // 提取主色并设置波浪颜色
+    const img = document.getElementById('header-cover')
+    if (img && img.complete) {
+      setWaveColor(img)
+    } else if (img) {
+      img.onload = () => setWaveColor(img)
+    }
+
     window.addEventListener('resize', updateHeaderHeight)
     return () => {
       window.removeEventListener('resize', updateHeaderHeight)
@@ -53,12 +61,32 @@ const Hero = props => {
     })
   }
 
+  function setWaveColor(img) {
+    try {
+      const colorThief = new ColorThief()
+      // 获取主色
+      const color = colorThief.getColor(img)
+      // 生成不同透明度的颜色
+      const base = `rgb(${color[0]},${color[1]},${color[2]})`
+      document.documentElement.style.setProperty('--gentle-wave1', base.replace('rgb', 'rgba').replace(')', ',0.5)'))
+      document.documentElement.style.setProperty('--gentle-wave2', base.replace('rgb', 'rgba').replace(')', ',0.3)'))
+      document.documentElement.style.setProperty('--gentle-wave3', base.replace('rgb', 'rgba').replace(')', ',0.15)'))
+      document.documentElement.style.setProperty('--gentle-wave', base.replace('rgb', 'rgba').replace(')', ',0.08)'))
+    } catch (e) {
+      // fallback: 默认蓝色
+      document.documentElement.style.setProperty('--gentle-wave1', 'rgba(0,123,255,0.5)')
+      document.documentElement.style.setProperty('--gentle-wave2', 'rgba(0,123,255,0.3)')
+      document.documentElement.style.setProperty('--gentle-wave3', 'rgba(0,123,255,0.15)')
+      document.documentElement.style.setProperty('--gentle-wave', 'rgba(0,123,255,0.08)')
+    }
+  }
+
   return (
     <header
       id='header'
       style={{ zIndex: 1 }}
       className=' w-full h-screen relative bg-black'>
-      <div className='text-white absolute flex flex-col h-full items-center justify-center w-full '>
+      <div className='text-white absolute flex flex-col h-full items-center justify-center w-full z-20'>
         {/* 站点标题 */}
         <div className='text-4xl md:text-5xl shadow-text'>
           <Link href='/'>
@@ -92,11 +120,11 @@ const Hero = props => {
         priority={true}
         id='header-cover'
         src={siteInfo?.pageCover}
-        className={`header-cover object-center w-full h-screen object-cover ${siteConfig('MATERY_HOME_NAV_BACKGROUND_IMG_FIXED', null, CONFIG) ? 'fixed' : ''}`}
+        className={`header-cover object-center w-full h-screen object-cover z-0 ${siteConfig('MATERY_HOME_NAV_BACKGROUND_IMG_FIXED', null, CONFIG) ? 'fixed' : ''}`}
       />
 
       {/* 波浪特效 */}
-      <div className="preview-overlay absolute bottom-0 left-0 w-full pointer-events-none">
+      <div className="preview-overlay absolute bottom-0 left-0 w-full pointer-events-none z-10">
         <svg className="preview-waves" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none" shapeRendering="auto">
           <defs>
             <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
