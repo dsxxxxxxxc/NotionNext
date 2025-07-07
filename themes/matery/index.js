@@ -62,7 +62,8 @@ const LayoutBase = props => {
   }, [])
   const containerSlot =
     router.route === '/' ? (
-      <Announcement {...props} />
+      // <Announcement {...props} />
+      null
     ) : (
       <BlogListBar {...props} />
     )
@@ -87,8 +88,12 @@ const LayoutBase = props => {
         <Style />
 
         {/* 动态背景特效 */}
-        <Script src='/line.js' strategy='afterInteractive' />
-        <Script src='/ribbonDynamic.js' strategy='afterInteractive' />
+        {post && (
+          <>
+            <Script src='/line.js' strategy='afterInteractive' />
+            <Script src='/ribbonDynamic.js' strategy='afterInteractive' />
+          </>
+        )}
 
         {/* 顶部导航栏 */}
         <Header {...props} />
