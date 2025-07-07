@@ -34,18 +34,18 @@ export default function WordCount({ wordCount, readTime, post }) {
 
   return (
     <div className='word-count-container border-l-2 border-gray-200 dark:border-gray-700 pl-3'>
-      <span id='wordCountWrapper' className='flex gap-3 font-light'>
+    <span id='wordCountWrapper' className='flex gap-3 font-light'>
         {wordCountEnable && (
-          <span className='flex whitespace-nowrap items-center'>
+      <span className='flex whitespace-nowrap items-center'>
             <i className='pl-1 pr-2 fas fa-file-word text-blue-500' />
-            <span>{locale.COMMON.WORD_COUNT}</span>&nbsp;
+        <span>{locale.COMMON.WORD_COUNT}</span>&nbsp;
             <span id='wordCount' className='font-medium'>{wordCount}</span>
-          </span>
+      </span>
         )}
         {readTimeEnable && (
-          <span className='flex whitespace-nowrap items-center'>
+      <span className='flex whitespace-nowrap items-center'>
             <i className='mr-1 fas fa-clock text-green-500' />
-            <span>{locale.COMMON.READ_TIME}≈</span>&nbsp;
+        <span>{locale.COMMON.READ_TIME}≈</span>&nbsp;
             <span id='readTime' className='font-medium'>{readTime}</span>&nbsp;{locale.COMMON.MINUTE}
           </span>
         )}
@@ -65,7 +65,7 @@ export default function WordCount({ wordCount, readTime, post }) {
           <span>
             <i className='fas fa-comment mr-1 text-red-500' />
             句子: {additionalStats.sentenceCount}
-          </span>
+    </span>
         </div>
       )}
     </div>

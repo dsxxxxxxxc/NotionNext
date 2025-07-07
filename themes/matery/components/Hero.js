@@ -5,6 +5,7 @@ import { useGlobal } from '@/lib/global'
 import { loadExternalResource } from '@/lib/utils'
 import { useEffect, useState } from 'react'
 import CONFIG from '../config'
+import SocialLinks from '@/components/SocialLinks'
 
 let wrapperTop = 0
 
@@ -76,6 +77,9 @@ const Hero = props => {
               locale.COMMON.START_READING}
           </span>
         </div>
+
+        {/* 社交媒体图标 */}
+        <SocialLinks />
       </div>
 
       <LazyImage
