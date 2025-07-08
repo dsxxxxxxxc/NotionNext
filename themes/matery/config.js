@@ -28,10 +28,6 @@ const CONFIG = {
   MATERY_WIDGET_TO_TOP: true,
   MATERY_WIDGET_TO_COMMENT: true, // 跳到评论区
   WIDGET_DARK_MODE: true, // 夜间模式
-  MATERY_WIDGET_TOC: true, // 移动端悬浮目录
-
-  // 背景特效
-  MATERY_BACKGROUND_ANIMATE_LINES: true, // 动态线条背景
-  MATERY_BACKGROUND_ANIMATE_RIBBONS: true // 动态彩带背景
+  MATERY_WIDGET_TOC: true // 移动端悬浮目录
 }
 export default CONFIG

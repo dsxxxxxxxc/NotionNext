@@ -87,22 +87,6 @@ const LayoutBase = props => {
         className={`${siteConfig('FONT_STYLE')} min-h-screen flex flex-col justify-between bg-hexo-background-gray dark:bg-black w-full scroll-smooth`}>
         <Style />
 
-        {/* 动态背景特效 */}
-        {siteConfig('MATERY_BACKGROUND_ANIMATE_LINES', null, CONFIG) && (
-          <Script 
-            src='/themes/matery/line.js' 
-            strategy='lazyOnload' 
-            onLoad={() => console.log('Line.js 脚本已加载')}
-          />
-        )}
-        {siteConfig('MATERY_BACKGROUND_ANIMATE_RIBBONS', null, CONFIG) && (
-          <Script 
-            src='/themes/matery/ribbonDynamic.js' 
-            strategy='lazyOnload' 
-            onLoad={() => console.log('RibbonDynamic.js 脚本已加载')}
-          />
-        )}
-
         {/* 顶部导航栏 */}
         <Header {...props} />
 

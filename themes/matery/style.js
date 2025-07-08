@@ -15,6 +15,39 @@ const Style = () => {
         background-color: #282c34;
       }
 
+      /* 为夜间模式添加One Dark Pro风格的次要背景色 */
+      .dark .bg-white {
+        background-color: #21252b !important;
+      }
+      
+      .dark .bg-gray-50 {
+        background-color: #21252b !important;
+      }
+      
+      .dark .bg-gray-100 {
+        background-color: #3e4451 !important;
+      }
+
+      /* One Dark Pro卡片和内容区域颜色 */
+      .dark .glassmorphism {
+        background-color: rgba(33, 37, 43, 0.8) !important;
+        border-color: #3e4451 !important;
+      }
+      
+      .dark .card {
+        background-color: #21252b !important;
+        border-color: #3e4451 !important;
+      }
+
+      /* One Dark Pro文本颜色 */
+      .dark .text-gray-600 {
+        color: #abb2bf !important;
+      }
+      
+      .dark .text-gray-700 {
+        color: #9ca3af !important;
+      }
+
       /* 设置了从上到下的渐变黑色 */
       #theme-matery .header-cover::before {
         content: '';
@@ -47,30 +80,19 @@ const Style = () => {
         background-color: #4338ca;
       }
 
+      /* 夜间模式下的滚动条颜色 */
+      .dark ::-webkit-scrollbar-thumb {
+        background-color: #5c6370;
+      }
+
       * {
         scrollbar-width: thin;
         scrollbar-color: #4338ca transparent;
       }
-
-      /* 确保背景特效canvas能够正常显示 */
-      canvas[id^="c_n"], #ribbon-canvas {
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        height: 100% !important;
-        z-index: -1 !important;
-        pointer-events: none !important;
-      }
       
-      /* line.js canvas 特定样式 */
-      canvas[id^="c_n"] {
-        z-index: -2 !important;
-      }
-      
-      /* ribbon canvas 特定样式 */
-      #ribbon-canvas {
-        z-index: -1 !important;
+      .dark * {
+        scrollbar-width: thin;
+        scrollbar-color: #5c6370 transparent;
       }
     `}</style>
   )

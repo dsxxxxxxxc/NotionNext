@@ -7,7 +7,6 @@ import { useEffect, useState } from 'react'
 import CONFIG from '../config'
 import SocialLinks from '@/components/SocialLinks'
 import Link from 'next/link'
-import ColorThief from 'color-thief-browser'
 
 let wrapperTop = 0
 
@@ -40,14 +39,6 @@ const Hero = props => {
       })
     }
 
-    // 提取主色并设置波浪颜色
-    const img = document.getElementById('header-cover')
-    if (img && img.complete) {
-      setWaveColor(img)
-    } else if (img) {
-      img.onload = () => setWaveColor(img)
-    }
-
     window.addEventListener('resize', updateHeaderHeight)
     return () => {
       window.removeEventListener('resize', updateHeaderHeight)
@@ -59,26 +50,6 @@ const Hero = props => {
       const wrapperElement = document.getElementById('wrapper')
       wrapperTop = wrapperElement?.offsetTop
     })
-  }
-
-  function setWaveColor(img) {
-    try {
-      const colorThief = new ColorThief()
-      // 获取主色
-      const color = colorThief.getColor(img)
-      // 生成不同透明度的颜色
-      const base = `rgb(${color[0]},${color[1]},${color[2]})`
-      document.documentElement.style.setProperty('--gentle-wave1', base.replace('rgb', 'rgba').replace(')', ',0.5)'))
-      document.documentElement.style.setProperty('--gentle-wave2', base.replace('rgb', 'rgba').replace(')', ',0.3)'))
-      document.documentElement.style.setProperty('--gentle-wave3', base.replace('rgb', 'rgba').replace(')', ',0.15)'))
-      document.documentElement.style.setProperty('--gentle-wave', base.replace('rgb', 'rgba').replace(')', ',0.08)'))
-    } catch (e) {
-      // fallback: 默认蓝色
-      document.documentElement.style.setProperty('--gentle-wave1', 'rgba(0,123,255,0.5)')
-      document.documentElement.style.setProperty('--gentle-wave2', 'rgba(0,123,255,0.3)')
-      document.documentElement.style.setProperty('--gentle-wave3', 'rgba(0,123,255,0.15)')
-      document.documentElement.style.setProperty('--gentle-wave', 'rgba(0,123,255,0.08)')
-    }
   }
 
   return (
