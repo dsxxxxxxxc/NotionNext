@@ -1,4 +1,16 @@
 ! function() {
+  console.log('Line.js: 开始初始化');
+  
+  // 等待DOM加载完成
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+  
+  function init() {
+    console.log('Line.js: DOM已加载，开始初始化canvas');
+    
   //封装方法，压缩之后减少文件大小
   function get_attribute(node, attr, default_value) {
     return node.getAttribute(attr) || default_value;
@@ -35,7 +47,8 @@
     //随机的线条和当前位置联合数组
     var e, i, d, x_dist, y_dist, dist; //临时节点
     //遍历处理每一个点
-    random_points.forEach(function(r, idx) {        r.x += r.xa,
+    random_points.forEach(function(r, idx) {
+      r.x += r.xa,
         r.y += r.ya, //移动
         r.xa *= r.x > canvas_width || r.x < 0 ? -1 : 1,
         r.ya *= r.y > canvas_height || r.y < 0 ? -1 : 1, //碰到边界，反向反弹
@@ -80,8 +93,9 @@
     },
     all_array;
   the_canvas.id = canvas_id;
-  the_canvas.style.cssText = "position:fixed;top:0;left:0;z-index:-1;opacity:" + config.o + ";pointer-events:none;";
+  the_canvas.style.cssText = "position:fixed;top:0;left:0;z-index:-2;opacity:" + config.o + ";pointer-events:none;";
   get_by_tagname("body")[0].appendChild(the_canvas);
+  console.log('Line.js: Canvas已添加到页面，ID:', canvas_id);
 
   //初始化画布大小
   set_canvas_size();
@@ -115,4 +129,6 @@
   setTimeout(function() {
     draw_canvas();
   }, 100);
+  
+  } // 结束init函数
 }();

@@ -51,6 +51,17 @@ const Style = () => {
         scrollbar-width: thin;
         scrollbar-color: #4338ca transparent;
       }
+
+      /* 确保背景特效canvas能够正常显示 */
+      canvas[id^="c_n"], #ribbon-canvas {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        z-index: -1 !important;
+        pointer-events: none !important;
+      }
     `}</style>
   )
 }

@@ -135,6 +135,7 @@
       }
     },
     init: function() {
+      console.log('RibbonDynamic.js: 开始初始化');
       try {
         this._canvas = document.createElement("canvas");
         this._canvas.style["display"] = "block";
@@ -149,7 +150,8 @@
         this._canvas.style["height"] = "100%";
         this._canvas.style["z-index"] = "-1";
         this._canvas.style["background-color"] = "transparent";
-        this._canvas.style["opacity"] = "0.3";
+        this._canvas.style["opacity"] = "0.6";
+        this._canvas.style["mix-blend-mode"] = "multiply";
         this._canvas.id = "ribbon-canvas";
         this._onResize();
         this._context = this._canvas.getContext("2d");
@@ -161,6 +163,7 @@
         // 这里设置添加的位置
         var body_ = document.getElementsByTagName('body')[0];
         body_.appendChild(this._canvas);
+        console.log('RibbonDynamic.js: Canvas已添加到页面，ID:', this._canvas.id);
       } catch (e) {
         console.warn("Canvas Context Error: " + e.toString());
         return;
@@ -316,4 +319,14 @@
   };
   return Factory;
 });
-new Ribbons();
+
+// 等待DOM加载完成后再初始化
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('RibbonDynamic.js: DOM已加载，开始初始化');
+    new Ribbons();
+  });
+} else {
+  console.log('RibbonDynamic.js: DOM已存在，直接初始化');
+  new Ribbons();
+}
