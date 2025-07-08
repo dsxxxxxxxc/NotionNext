@@ -88,11 +88,11 @@ const LayoutBase = props => {
         <Style />
 
         {/* 动态背景特效 */}
-        {post && (
-          <>
-            <Script src='/js/line.js' strategy='afterInteractive' />
-            <Script src='/js/ribbonDynamic.js' strategy='afterInteractive' />
-          </>
+        {siteConfig('MATERY_BACKGROUND_ANIMATE_LINES', null, CONFIG) && (
+          <Script src='/js/line.js' strategy='afterInteractive' />
+        )}
+        {siteConfig('MATERY_BACKGROUND_ANIMATE_RIBBONS', null, CONFIG) && (
+          <Script src='/js/ribbonDynamic.js' strategy='afterInteractive' />
         )}
 
         {/* 顶部导航栏 */}

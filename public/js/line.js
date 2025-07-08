@@ -35,11 +35,11 @@
     //随机的线条和当前位置联合数组
     var e, i, d, x_dist, y_dist, dist; //临时节点
     //遍历处理每一个点
-    random_points.forEach(function(r, idx) {
-      r.x += r.xa,
+    random_points.forEach(function(r, idx) {        r.x += r.xa,
         r.y += r.ya, //移动
         r.xa *= r.x > canvas_width || r.x < 0 ? -1 : 1,
         r.ya *= r.y > canvas_height || r.y < 0 ? -1 : 1, //碰到边界，反向反弹
+        context.fillStyle = "rgba(" + config.c + "," + config.o + ")",
         context.fillRect(r.x - 0.5, r.y - 0.5, 1, 1); //绘制一个宽高为1的点
       //从下一个点开始
       for (i = idx + 1; i < all_array.length; i++) {
@@ -54,7 +54,7 @@
             d = (e.max - dist) / e.max,
             context.beginPath(),
             context.lineWidth = d / 2,
-            context.strokeStyle = "#000000",
+            context.strokeStyle = "rgba(" + config.c + "," + (d + 0.2) + ")",
             context.moveTo(r.x, r.y),
             context.lineTo(e.x, e.y),
             context.stroke());
@@ -80,7 +80,7 @@
     },
     all_array;
   the_canvas.id = canvas_id;
-  the_canvas.style.cssText = "position:fixed;top:0;left:0;z-index:" + config.z + ";opacity:" + config.o;
+  the_canvas.style.cssText = "position:fixed;top:0;left:0;z-index:-1;opacity:" + config.o + ";pointer-events:none;";
   get_by_tagname("body")[0].appendChild(the_canvas);
 
   //初始化画布大小
