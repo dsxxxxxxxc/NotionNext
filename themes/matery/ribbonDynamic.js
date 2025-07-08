@@ -6,13 +6,13 @@
   var _w = window,
     _b = document.body,
     _d = document.documentElement;
-  var random = function() {
+  var ribbonRandom = function() {
     if (arguments.length === 1) {
       if (Array.isArray(arguments[0])) {
-        var index = Math.round(random(0, arguments[0].length - 1));
+        var index = Math.round(ribbonRandom(0, arguments[0].length - 1));
         return arguments[0][index];
       }
-      return random(0, arguments[0]);
+      return ribbonRandom(0, arguments[0]);
     } else if (arguments.length === 2) {
       return Math.random() * (arguments[1] - arguments[0]) + arguments[0];
     }
@@ -171,7 +171,7 @@
       this._onDraw();
     },
     addRibbon: function() {
-      var dir = Math.round(random(1, 9)) > 5 ? "right" : "left",
+      var dir = Math.round(ribbonRandom(1, 9)) > 5 ? "right" : "left",
         stop = 1000,
         hide = 200,
         min = 0 - hide,
@@ -179,7 +179,7 @@
         movex = 0,
         movey = 0,
         startx = dir === "right" ? min : max,
-        starty = Math.round(random(0, this._height));
+        starty = Math.round(ribbonRandom(0, this._height));
       if (/^(top|min)$/i.test(this._options.verticalPosition)) {
         starty = 0 + hide;
       } else if (/^(middle|center)$/i.test(this._options.verticalPosition)) {
@@ -191,7 +191,7 @@
         point1 = new Point(startx, starty),
         point2 = new Point(startx, starty),
         point3 = null,
-        color = Math.round(random(0, 360)),
+        color = Math.round(ribbonRandom(0, 360)),
         delay = 0;
       while (true) {
         if (stop <= 0) break;
@@ -321,12 +321,18 @@
 });
 
 // 等待DOM加载完成后再初始化
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', function() {
-    console.log('RibbonDynamic.js: DOM已加载，开始初始化');
-    new Ribbons();
-  });
+if (window.MateryRibbonBackground) {
+  console.log('RibbonDynamic.js: 已存在，跳过初始化');
 } else {
-  console.log('RibbonDynamic.js: DOM已存在，直接初始化');
-  new Ribbons();
+  window.MateryRibbonBackground = true;
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('RibbonDynamic.js: DOM已加载，开始初始化');
+      new Ribbons();
+    });
+  } else {
+    console.log('RibbonDynamic.js: DOM已存在，直接初始化');
+    new Ribbons();
+  }
 }

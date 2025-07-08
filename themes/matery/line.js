@@ -1,4 +1,11 @@
 ! function() {
+  // 命名空间保护
+  if (window.MateryLineBackground) {
+    console.log('Line.js: 已存在，跳过初始化');
+    return;
+  }
+  window.MateryLineBackground = true;
+  
   console.log('Line.js: 开始初始化');
   
   // 等待DOM加载完成
@@ -43,7 +50,7 @@
 
   //绘制过程
   function draw_canvas() {
-    context.clearRect(0, 0, canvas_width, canvas_height);
+    lineContext.clearRect(0, 0, canvas_width, canvas_height);
     //随机的线条和当前位置联合数组
     var e, i, d, x_dist, y_dist, dist; //临时节点
     //遍历处理每一个点
@@ -52,8 +59,8 @@
         r.y += r.ya, //移动
         r.xa *= r.x > canvas_width || r.x < 0 ? -1 : 1,
         r.ya *= r.y > canvas_height || r.y < 0 ? -1 : 1, //碰到边界，反向反弹
-        context.fillStyle = "rgba(" + config.c + "," + config.o + ")",
-        context.fillRect(r.x - 0.5, r.y - 0.5, 1, 1); //绘制一个宽高为1的点
+        lineContext.fillStyle = "rgba(" + config.c + "," + config.o + ")",
+        lineContext.fillRect(r.x - 0.5, r.y - 0.5, 1, 1); //绘制一个宽高为1的点
       //从下一个点开始
       for (i = idx + 1; i < all_array.length; i++) {
         e = all_array[i];
@@ -65,12 +72,12 @@
 
           dist < e.max && (e === current_point && dist >= e.max / 2 && (r.x -= 0.03 * x_dist, r.y -= 0.03 * y_dist), //靠近的时候加速
             d = (e.max - dist) / e.max,
-            context.beginPath(),
-            context.lineWidth = d / 2,
-            context.strokeStyle = "rgba(" + config.c + "," + (d + 0.2) + ")",
-            context.moveTo(r.x, r.y),
-            context.lineTo(e.x, e.y),
-            context.stroke());
+            lineContext.beginPath(),
+            lineContext.lineWidth = d / 2,
+            lineContext.strokeStyle = "rgba(" + config.c + "," + (d + 0.2) + ")",
+            lineContext.moveTo(r.x, r.y),
+            lineContext.lineTo(e.x, e.y),
+            lineContext.stroke());
         }
       }
     }), frame_func(draw_canvas);
@@ -80,12 +87,12 @@
   var the_canvas = document.createElement("canvas"), //画布
     config = get_config_option(), //配置
     canvas_id = "c_n" + config.l, //canvas id
-    context = the_canvas.getContext("2d"),
+    lineContext = the_canvas.getContext("2d"),
     canvas_width, canvas_height,
     frame_func = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function(func) {
       window.setTimeout(func, 1000 / 40);
     },
-    random = Math.random,
+    lineRandom = Math.random,
     current_point = {
       x: null, //当前鼠标x
       y: null, //当前鼠标y
@@ -99,22 +106,23 @@
 
   //初始化画布大小
   set_canvas_size();
-  window.onresize = set_canvas_size;
+  window.addEventListener('resize', set_canvas_size);
   //当时鼠标位置存储，离开的时候，释放当前位置信息
-  window.onmousemove = function(e) {
+  window.addEventListener('mousemove', function(e) {
     e = e || window.event;
     current_point.x = e.clientX;
     current_point.y = e.clientY;
-  }, window.onmouseout = function() {
+  });
+  window.addEventListener('mouseout', function() {
     current_point.x = null;
     current_point.y = null;
-  };
+  });
   //随机生成config.n条线位置信息
   for (var random_points = [], i = 0; config.n > i; i++) {
-    var x = random() * canvas_width, //随机位置
-      y = random() * canvas_height,
-      xa = 2 * random() - 1, //随机运动方向
-      ya = 2 * random() - 1;
+    var x = lineRandom() * canvas_width, //随机位置
+      y = lineRandom() * canvas_height,
+      xa = 2 * lineRandom() - 1, //随机运动方向
+      ya = 2 * lineRandom() - 1;
     // 随机点
     random_points.push({
       x: x,

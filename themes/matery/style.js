@@ -12,7 +12,7 @@ const Style = () => {
         background-color: #f5f5f5;
       }
       .dark body {
-        background-color: black;
+        background-color: #282c34;
       }
 
       /* 设置了从上到下的渐变黑色 */
@@ -61,6 +61,16 @@ const Style = () => {
         height: 100% !important;
         z-index: -1 !important;
         pointer-events: none !important;
+      }
+      
+      /* line.js canvas 特定样式 */
+      canvas[id^="c_n"] {
+        z-index: -2 !important;
+      }
+      
+      /* ribbon canvas 特定样式 */
+      #ribbon-canvas {
+        z-index: -1 !important;
       }
     `}</style>
   )

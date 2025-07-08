@@ -90,22 +90,18 @@ const LayoutBase = props => {
         {/* 动态背景特效 */}
         {siteConfig('MATERY_BACKGROUND_ANIMATE_LINES', null, CONFIG) && (
           <Script 
-            src='/js/line.js' 
+            src='/themes/matery/line.js' 
             strategy='lazyOnload' 
             onLoad={() => console.log('Line.js 脚本已加载')}
           />
         )}
         {siteConfig('MATERY_BACKGROUND_ANIMATE_RIBBONS', null, CONFIG) && (
           <Script 
-            src='/js/ribbonDynamic.js' 
+            src='/themes/matery/ribbonDynamic.js' 
             strategy='lazyOnload' 
             onLoad={() => console.log('RibbonDynamic.js 脚本已加载')}
           />
         )}
-        <Script 
-          src='/js/test-background.js' 
-          strategy='lazyOnload' 
-        />
 
         {/* 顶部导航栏 */}
         <Header {...props} />
